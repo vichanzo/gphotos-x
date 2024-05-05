@@ -1,12 +1,15 @@
 ---
-version: "3.1"
+version: "2.1"
 services:
-   gphoto-x:
-      image: ghcr.io/gilesknap/gphotos-sync
-      container_name: gphoto
-      volumes:
-          - ./storage:/storage
-	  - ./config:/config
-      ports:
-	  - 4563:8080
-      restart: unless-stopped
+  gphoto-x:
+    image: ghcr.io/gilesknap/gphotos-sync
+    container_name: gphoto
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./storage:/storage
+      - ./gphoto-config:/config
+    ports:
+      - 8989:8080
+    restart: unless-stopped
